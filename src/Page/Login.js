@@ -6,6 +6,7 @@ import logoImage from "../Resource/logo.png";
 import LoginFormItem from "../Component/common/LoginFormItem";
 import MainButton from "../Component/common/MainButton";
 import {useCallback, useState} from "react";
+import {Typography} from "@mui/material";
 
 /**
  *  로그인/회원가입 페이지
@@ -83,9 +84,19 @@ const Login = () => {
                         value={password}
                         onChange={onChangePassword}
                         type={`password`}
+                        marginBottom={`25px`}
                     >
                         비밀번호
                     </LoginFormItem>
+
+                    <Typography sx={{
+                        textDecoration: `underline`,
+                        mx: `auto`,
+                        color: `blue`,
+                        cursor: `pointer`,
+                    }}>
+                        아이디가 없으신가요?
+                    </Typography>
 
                     <MainButton
                         onClick={onClickLogin}
