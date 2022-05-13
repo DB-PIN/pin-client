@@ -10,6 +10,7 @@ const LoginFormItem = ({
     value,      // Input의 내용
     onChange,   // Input 의 onChange
     type,       // Input 의 타입
+    marginBottom,
                        }) => {
     return (
         <Box sx={{
@@ -18,6 +19,7 @@ const LoginFormItem = ({
             height: `auto`,
             mx: `auto`,
             flexDirection: `row`,
+            mb: `${marginBottom}`,
         }}>
 
             <Box
