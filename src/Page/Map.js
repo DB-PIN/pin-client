@@ -5,11 +5,11 @@
 import background from '../Resource/background.png';
 import logoImage from '../Resource/logo.png';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Input from '@mui/material/Input';
 import {styled} from '@mui/system';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LoginFormItem from "../Component/common/LoginFormItem";
+import MainButton from "../Component/common/MainButton";
+import {useCallback, useState} from "react";
 
 const theme = createTheme({
     palette: {
@@ -28,6 +28,17 @@ const Background = styled(Box)(p => ({
 }));
 
 const Map = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const onChangeEmail = useCallback((e) => {
+        setEmail(e.target.value);
+    }, []);
+
+    const onChangePassword = useCallback((e) => {
+        setPassword(e.target.value);
+    }, []);
+
     return (
         <ThemeProvider theme={theme}>
             <Background>
@@ -55,70 +66,24 @@ const Map = () => {
                         position: `relative`,
                     }}>
 
-                        <Box sx={{
-                            display: `flex`,
-                            width: `80%`,
-                            height: `auto`,
-                            mx: `auto`,
-                            flexDirection: `row`,
-                            my: `30px`
-                        }}>
+                        <LoginFormItem
+                            value={email}
+                            onChange={onChangeEmail}
+                        >
+                            이메일
+                        </LoginFormItem>
 
-                            <Box
-                                sx={{
-                                    width: `40%`,
-                                    height: `25px`,
-                                    lineHeight: `25px`
-                                }}
-                            >
-                                Email
-                            </Box>
+                        <LoginFormItem
+                            value={password}
+                            onChange={onChangePassword}
+                            type={`password`}
+                        >
+                            비밀번호
+                        </LoginFormItem>
 
-                            <Input
-                                sx={{ width: `60%`, height: `25px` }}
-                                size={`small`}
-                            ></Input>
-
-                        </Box>
-
-                        <Box sx={{
-                            display: `flex`,
-                            width: `80%`,
-                            height: `auto`,
-                            mx: `auto`,
-                            flexDirection: `row`,
-                            my: `30px`
-                        }}>
-
-                            <Box
-                                sx={{
-                                    width: `40%`,
-                                    height: `25px`,
-                                    lineHeight: `25px`
-                                }}
-                            >
-                                Password
-                            </Box>
-
-                            <Input
-                                sx={{ width: `60%`, height: `25px` }}
-                                size={`small`}
-                                type={`password`}
-                            ></Input>
-
-                        </Box>
-
-                        <Button
-                            variant={`contained`}
-                            sx={{
-                                width: `100px`,
-                                borderRadius: `30px`,
-                                position: `absolute`,
-                                left: `50%`,
-                                transform: `translate(-50%, -50%)`,
-                                bottom: 10,
-                            }}
-                        >로그인</Button>
+                        <MainButton>
+                            로그인
+                        </MainButton>
                     </Box>
                 </Box>
             </Background>
