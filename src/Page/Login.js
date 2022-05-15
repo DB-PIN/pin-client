@@ -1,12 +1,11 @@
 import {styled} from "@mui/system";
 import Box from "@mui/material/Box";
 import background from "../Resource/background.png";
-import {serverApis} from "../api/Api";
 import logoImage from "../Resource/logo.png";
-import LoginFormItem from "../Component/common/LoginFormItem";
-import MainButton from "../Component/common/MainButton";
 import {useCallback, useState} from "react";
-import {Typography} from "@mui/material";
+import {Route, Routes} from 'react-router-dom';
+import LoginBox from "../Component/common/LoginBox";
+import SignUpBox from "../Component/common/SignUpBox";
 
 /**
  *  로그인/회원가입 페이지
@@ -23,6 +22,7 @@ const Background = styled(Box)(p => ({
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [nickname, setNickname] = useState("");
 
     const onChangeEmail = useCallback((e) => {
         setEmail(e.target.value);
@@ -32,17 +32,9 @@ const Login = () => {
         setPassword(e.target.value);
     }, []);
 
-    const onClickLogin = useCallback((e) => {
-        const userLoginDto = {
-            email,
-            password,
-        }
-
-        serverApis.login(userLoginDto)
-            .then(r => {
-                console.log(r.data);
-            })
-    }, [email, password]);
+    const onChangeNickname = useCallback((e) => {
+        setNickname(e.target.value);
+    }, []);
 
     return (
         <Background>
@@ -70,39 +62,22 @@ const Login = () => {
                     position: `relative`,
                     borderRadius: `25px`,
                 }}>
-                    <Box sx={{ height: `20%` }}></Box>
-
-                    <LoginFormItem
-                        value={email}
-                        onChange={onChangeEmail}
-                        marginBottom={`25px`}
-                    >
-                        이메일
-                    </LoginFormItem>
-
-                    <LoginFormItem
-                        value={password}
-                        onChange={onChangePassword}
-                        type={`password`}
-                        marginBottom={`25px`}
-                    >
-                        비밀번호
-                    </LoginFormItem>
-
-                    <Typography sx={{
-                        textDecoration: `underline`,
-                        mx: `auto`,
-                        color: `blue`,
-                        cursor: `pointer`,
-                    }}>
-                        아이디가 없으신가요?
-                    </Typography>
-
-                    <MainButton
-                        onClick={onClickLogin}
-                    >
-                        로그인
-                    </MainButton>
+                    <Routes>
+                        <Route path='/' element={<LoginBox
+                            email={email}
+                            password={password}
+                            onChangeEmail={onChangeEmail}
+                            onChangePassword={onChangePassword}
+                        />} />
+                        <Route path='/signup/' element={<SignUpBox
+                            email={email}
+                            password={password}
+                            nickname={nickname}
+                            onChangeEmail={onChangeEmail}
+                            onChangePassword={onChangePassword}
+                            onChangeNickname={onChangeNickname}
+                        />} />
+                    </Routes>
                 </Box>
             </Box>
         </Background>
