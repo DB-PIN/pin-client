@@ -20,16 +20,17 @@ const SignUpBox = ({
 }) => {
 
     const onClickSignUp = useCallback((e) => {
-        const userLoginDto = {
-            email,
-            password,
+        const userDto = {
+            email: email,
+            name: nickname,
+            password: password,
         }
 
-        serverApis.login(userLoginDto)
+        serverApis.signUp(userDto)
             .then(r => {
                 console.log(r.data);
             })
-    }, [email, password]);
+    }, [email, password, nickname]);
 
     return (
         <>

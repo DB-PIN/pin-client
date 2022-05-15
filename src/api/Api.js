@@ -8,6 +8,12 @@ const serverApis = {
             .then(r => resolve(r))
             .catch(e => reject(e))
     }),
+    signUp: (userDto) => new Promise((resolve, reject) => {
+        axios.post(`${addr}/user`, userDto)
+            .then(r => resolve(r))
+            .catch(e => reject(e))
+    }),
+
     getPlaylistAllCountByFilter: (ownerId, searchWord) => new Promise((resolve, reject) => {
         axios.get(`${addr}/getPlaylistAllCountByFilter/${ownerId}/${searchWord}`)
             .then(r => resolve(r))
