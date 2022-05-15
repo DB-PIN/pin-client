@@ -19,7 +19,7 @@ root.render(
     <ThemeProvider theme={theme}>
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Login />} />
+                <Route path='/*' element={<Login />} />
             </Routes>
         </BrowserRouter>
     </ThemeProvider>
