@@ -10,6 +10,7 @@ import {useCallback} from "react";
 import {styled} from "@mui/system";
 import dim from "../../resource/Dimentions";
 import logoImage from "../../resource/logo.png";
+import Logo from "./Logo";
 
 const Container = styled(Box)(p => ({
     width: `100%`,
@@ -46,12 +47,7 @@ const Header = () => {
                     alignItems: `center`,
                 }}
             >
-                <img
-                    width={`50%`}
-                    height={`80%`}
-                    src={logoImage}
-                    alt={``}
-                />
+                <Logo />
             </Box>
 
             <Box
