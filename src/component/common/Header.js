@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import {useCallback} from "react";
 import {styled} from "@mui/system";
 import dim from "../../resource/Dimentions";
+import logoImage from "../../resource/logo.png";
 
 const Container = styled(Box)(p => ({
     width: `100%`,
@@ -41,17 +42,16 @@ const Header = () => {
                     width: `50%`,
                     cursor: `default`,
                     userSelect: `none`,
+                    display: `flex`,
+                    alignItems: `center`,
                 }}
             >
-                <Typography
-                    lineHeight={dim.headerHeight}
-                    marginLeft={`20px`}
-                    fontSize={`25px`}
-                    fontWeight={`bold`}
-
-                >
-                    나만의 지도
-                </Typography>
+                <img
+                    width={`50%`}
+                    height={`80%`}
+                    src={logoImage}
+                    alt={``}
+                />
             </Box>
 
             <Box
