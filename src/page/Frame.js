@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Header from "../component/common/Header";
 import {Routes, Route} from 'react-router-dom';
 import PinList from "./PinList";
+import AddPin from "./AddPin";
 
 /**
  *  Header 를 포함하는 큰 틀
@@ -11,6 +12,9 @@ import PinList from "./PinList";
 const Background = styled(Box)(p => ({
     height: `100vh`,
     overflow: `hidden`,
+    display: `flex`,
+    flexDirection: `column`,
+    position: `relative`,
 }));
 
 const Body = styled(Box)(p => ({
@@ -26,6 +30,7 @@ const Frame = () => {
             <Body>
                 <Routes>
                     <Route path={`/pinList/*`} element={<PinList />} />
+                    <Route path={`/addPin`} element={<AddPin />} />
                 </Routes>
             </Body>
         </Background>
