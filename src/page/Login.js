@@ -6,6 +6,7 @@ import {useCallback, useState} from "react";
 import {Route, Routes} from 'react-router-dom';
 import LoginBox from "../component/common/LoginBox";
 import SignUpBox from "../component/common/SignUpBox";
+import Logo from "../component/common/Logo";
 
 /**
  *  로그인/회원가입 페이지
@@ -47,11 +48,12 @@ const Login = () => {
                 alignItems: `center`,
                 justifyContent: `center`,
             }}>
-                <img
-                    src={logoImage}
-                    width={`200px`}
-                    height={`100px`}
-                />
+                <Box
+                    sx={{ width: `200px`, height: `100px` }}
+                >
+                    <Logo />
+                </Box>
+
 
                 <Box sx={{
                     width: `100%`,
