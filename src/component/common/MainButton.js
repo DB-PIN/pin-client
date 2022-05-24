@@ -17,8 +17,8 @@ const MainButton = ({
                 borderRadius: `30px`,
                 position: `absolute`,
                 left: `50%`,
-                transform: `translate(-50%, -50%)`,
                 bottom: 10,
+                transform: `translate(-50%, -50%)`,
             }}
         >
             {children}

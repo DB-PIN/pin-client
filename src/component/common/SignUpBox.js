@@ -4,6 +4,7 @@ import {Link, Typography} from "@mui/material";
 import MainButton from "./MainButton";
 import {useCallback} from "react";
 import {serverApis} from "../../api/Api";
+import path from "../../resource/Path";
 
 /**
  *  회원가입 정보를 입력하는 박스
@@ -30,6 +31,7 @@ const SignUpBox = ({
             .then(r => {
                 console.log(r.data);
             })
+            .catch(e => console.log(e));
     }, [email, password, nickname]);
 
     return (
@@ -63,7 +65,7 @@ const SignUpBox = ({
 
             <Link
                 sx={{ mx: `auto` }}
-                href='/'
+                href={path.full.login}
             >
                 아이디가 이미 있으신가요?
             </Link>

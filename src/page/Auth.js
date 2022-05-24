@@ -7,6 +7,9 @@ import {Route, Routes} from 'react-router-dom';
 import LoginBox from "../component/common/LoginBox";
 import SignUpBox from "../component/common/SignUpBox";
 import Logo from "../component/common/Logo";
+import path from "../resource/Path";
+import dim from "../resource/Dimentions";
+import color from "../resource/Color";
 
 /**
  *  로그인/회원가입 페이지
@@ -20,7 +23,7 @@ const Background = styled(Box)(p => ({
     alignItems: `center`
 }));
 
-const Login = () => {
+const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [nickname, setNickname] = useState("");
@@ -40,7 +43,7 @@ const Login = () => {
     return (
         <Background>
             <Box sx={{
-                width: `300px`,
+                width: dim.authBoxWidth,
                 height: `100%`,
                 mx: `auto`,
                 display: `flex`,
@@ -49,7 +52,7 @@ const Login = () => {
                 justifyContent: `center`,
             }}>
                 <Box
-                    sx={{ width: `200px`, height: `100px` }}
+                    sx={{ width: dim.authLogoWidth, height: dim.authLogoHeight }}
                 >
                     <Logo />
                 </Box>
@@ -57,21 +60,22 @@ const Login = () => {
 
                 <Box sx={{
                     width: `100%`,
-                    height: `420px`,
-                    backgroundColor: `white`,
+                    height: dim.authBoxHeight,
+                    backgroundColor: color.white,
                     display: `flex`,
                     flexDirection: `column`,
                     position: `relative`,
-                    borderRadius: `25px`,
+                    borderRadius: dim.authBoxRadius,
+                    boxShadow: dim.shadow,
                 }}>
                     <Routes>
-                        <Route path='/' element={<LoginBox
+                        <Route path={path.routing.login} element={<LoginBox
                             email={email}
                             password={password}
                             onChangeEmail={onChangeEmail}
                             onChangePassword={onChangePassword}
                         />} />
-                        <Route path='/signup/' element={<SignUpBox
+                        <Route path={path.routing.signUp} element={<SignUpBox
                             email={email}
                             password={password}
                             nickname={nickname}
@@ -86,4 +90,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Auth;

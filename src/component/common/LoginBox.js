@@ -4,6 +4,7 @@ import {Link, Typography} from "@mui/material";
 import MainButton from "./MainButton";
 import {useCallback} from "react";
 import {serverApis} from "../../api/Api";
+import path from "../../resource/Path";
 
 /**
  *  로그인 정보를 입력하는 박스
@@ -52,7 +53,7 @@ const LoginBox = ({
 
             <Link
                 sx={{ mx: `auto` }}
-                href='/signup/'
+                href={path.full.signUp}
             >
                 아이디가 없으신가요?
             </Link>

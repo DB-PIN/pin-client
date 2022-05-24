@@ -13,6 +13,28 @@ const serverApis = {
             .then(r => resolve(r))
             .catch(e => reject(e))
     }),
+    addPin: (pinDto) => new Promise((resolve, reject) => {
+        axios.post(`${addr}/user/pin`, pinDto)
+            .then(r => resolve(r))
+            .catch(e => reject(e))
+    }),
+
+    getEmotions: () => new Promise((resolve, reject) => {
+        axios.get(`${addr}/emotions`)
+            .then(r => resolve(r))
+            .catch(e => reject(e));
+    }),
+    getCategories: () => new Promise((resolve, reject) => {
+        axios.get(`${addr}/categories`)
+            .then(r => resolve(r))
+            .catch(e => reject(e));
+    }),
+    getGroups: () => new Promise((resolve, reject) => {
+        axios.get(`${addr}/user/groups`)
+            .then(r => resolve(r))
+            .catch(e => reject(e));
+    }),
+
 
     getPlaylistAllCountByFilter: (ownerId, searchWord) => new Promise((resolve, reject) => {
         axios.get(`${addr}/getPlaylistAllCountByFilter/${ownerId}/${searchWord}`)
