@@ -4,18 +4,17 @@ const path = {
         login: `/login`,
         signUp: '/signUp',
         frame: `/*`,
-        map: `/map/*`,
-        mapList: `/mapList/*`,
-        post: `/post/*`,
+        pinList: `/pinList`,
+        addPin: `/addPin/*`
     },
     full: {
         auth: '/auth',
         login: '/auth/login',
         signUp: '/auth/signup',
         frame: `/`,
-        map: `/map`,
-        mapList: `/mapList`,
-        post: `/post`,
+        pinList: `/pinList`,
+        addPin: `/addPin`,
+        addPinWith: ((pinId) => `/addPin/${pinId}`),
     }
 }
 

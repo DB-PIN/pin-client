@@ -30,7 +30,7 @@ const AddPinItem = ({
             ) : (
                 <Select sx={{ width: `70%`, height: `100%` }} defaultValue={menuItemList[0]} >
                     {menuItemList?.map(item => (
-                        <MenuItem value={item}>{item}</MenuItem>
+                        <MenuItem key={item} value={item}>{item}</MenuItem>
                     ))}
                 </Select>
             )}

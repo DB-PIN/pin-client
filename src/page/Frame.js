@@ -1,9 +1,11 @@
 import {styled} from "@mui/system";
 import Box from "@mui/material/Box";
 import Header from "../component/common/Header";
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 import PinList from "./PinList";
 import AddPin from "./AddPin";
+import path from "../resource/Path";
+import {useEffect} from "react";
 
 /**
  *  Header 를 포함하는 큰 틀
@@ -23,14 +25,21 @@ const Body = styled(Box)(p => ({
 }));
 
 const Frame = () => {
+    const {pathname} = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(pathname === '/') navigate(path.full.pinList);
+    }, []);
+
     return (
         <Background>
             <Header />
 
             <Body>
                 <Routes>
-                    <Route path={`/pinList/*`} element={<PinList />} />
-                    <Route path={`/addPin`} element={<AddPin />} />
+                    <Route path={path.routing.pinList} element={<PinList />} />
+                    <Route path={path.routing.addPin} element={<AddPin />} />
                 </Routes>
             </Body>
         </Background>
