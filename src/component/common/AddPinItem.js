@@ -18,6 +18,9 @@ const AddPinItem = ({
     type,
     menuItemList,
     children,
+
+    value,
+    onChangeValue,
 }) => {
     return (
         <Container>
@@ -28,9 +31,9 @@ const AddPinItem = ({
             {type === 'input' ? (
                 <Input sx={{ width: `70%`, height: `100%` }} />
             ) : (
-                <Select sx={{ width: `70%`, height: `100%` }} defaultValue={menuItemList[0]} >
+                <Select sx={{ width: `70%`, height: `100%` }} value={value} onChange={onChangeValue} >
                     {menuItemList?.map(item => (
-                        <MenuItem key={item} value={item}>{item}</MenuItem>
+                        <MenuItem key={item?.id} value={item.id}>{item.name}</MenuItem>
                     ))}
                 </Select>
             )}

@@ -2,9 +2,12 @@ import Box from "@mui/material/Box";
 import LoginFormItem from "./LoginFormItem";
 import {Link, Typography} from "@mui/material";
 import MainButton from "./MainButton";
-import {useCallback} from "react";
+import {useCallback, useState} from "react";
 import {serverApis} from "../../api/Api";
 import path from "../../resource/Path";
+import {useNavigate} from "react-router-dom";
+import Spin from "./Spin";
+import {Cookies} from "react-cookie";
 
 /**
  *  로그인 정보를 입력하는 박스
@@ -17,6 +20,9 @@ const LoginBox = ({
     onChangeEmail,
     onChangePassword,
 }) => {
+    const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const onClickLogin = useCallback((e) => {
         const userLoginDto = {
@@ -24,14 +30,34 @@ const LoginBox = ({
             password,
         }
 
+        setIsLoading(true);
+
         serverApis.login(userLoginDto)
             .then(r => {
-                console.log(r.data);
+                setIsLoading(false);
+
+                new Cookies().set("isLogin", "1");
+
+                navigate(path.full.pinList);
             })
+            .catch(e => console.log(e));
     }, [email, password]);
 
     return (
         <>
+            {isLoading && (
+                <Box
+                    sx={{
+                        position: `absolute`,
+                        width: `100%`,
+                        height: `100%`,
+                        zIndex: `100`,
+                    }}
+                >
+                    <Spin />
+                </Box>
+            )}
+
             <Box sx={{ height: `20%` }}></Box>
 
             <LoginFormItem

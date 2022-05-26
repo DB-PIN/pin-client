@@ -11,6 +11,8 @@ import {styled} from "@mui/system";
 import dim from "../../resource/Dimentions";
 import logoImage from "../../resource/logo.png";
 import Logo from "./Logo";
+import {Cookies} from "react-cookie";
+import path from "../../resource/Path";
 
 const Container = styled(Box)(p => ({
     width: `100%`,
@@ -28,17 +30,30 @@ const Container = styled(Box)(p => ({
 const Header = () => {
     const navigate = useNavigate();
 
-    const onClickMapListBtn = useCallback((e) => {
-        //
+    const onClickLogo = useCallback(() => {
+        navigate(path.full.pinList);
+    }, []);
+
+    const onClickFilterBtn = useCallback((e) => {
+        navigate(path.full.filter);
     }, []);
 
     const onClickUserBtn = useCallback((e) => {
-        //
+        const cookies = new Cookies();
+
+        // 쿠키에 로그인 관련 정보가 담겨있으면 MyPage 로 이동
+        if(cookies.get('isLogin')) {
+
+        } else {
+            // 로그인 관련 정보가 없으면 로그인 페이지로 이동
+            navigate(path.full.login);
+        }
     }, []);
 
     return (
         <Container>
             <Box
+                onClick={onClickLogo}
                 sx={{
                     width: `50%`,
                     cursor: `default`,
@@ -60,7 +75,7 @@ const Header = () => {
                 }}
             >
                 <IconButton
-                    onClick={onClickMapListBtn}
+                    onClick={onClickFilterBtn}
                     sx={{
                         width: dim.headerHeight,
                         height: dim.headerHeight,
