@@ -6,6 +6,8 @@ import PinList from "./PinList";
 import AddPin from "./AddPin";
 import path from "../resource/Path";
 import {useEffect} from "react";
+import Filter from "./Filter";
+import MyPage from "./MyPage";
 
 /**
  *  Header 를 포함하는 큰 틀
@@ -40,6 +42,8 @@ const Frame = () => {
                 <Routes>
                     <Route path={path.routing.pinList} element={<PinList />} />
                     <Route path={path.routing.addPin} element={<AddPin />} />
+                    <Route path={path.routing.filter} element={<Filter />} />
+                    <Route path={path.routing.myPage} element={<MyPage />} />
                 </Routes>
             </Body>
         </Background>

@@ -6,10 +6,12 @@ import {styled} from "@mui/system";
 import Box from "@mui/material/Box";
 import PinItem from "../component/common/PinItem";
 import dim from "../resource/Dimentions";
-import {Fab} from "@mui/material";
+import {Fab, SvgIcon} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
+import {serverApis} from "../api/Api";
+import EmoLove from '../resource/emo_love.svg';
 
 const Container = styled(Box)(p => ({
     width: `100%`,
@@ -26,16 +28,30 @@ const PinList = () => {
 
     useEffect(() => {
         // /pinList?emotion=1&category=1&follow=1
+        const emotionId = searchParams.get('emotion') || -1;
+        const categoryId = searchParams.get('category') || -1;
+        const followingId = searchParams.get('follow') || -1;
+
+        if(emotionId === -1 && categoryId === -1 && followingId === -1) {
+            serverApis.getAllPin()
+                .then(r => {
+                    setPinList(r.data);
+                })
+                .catch(e => console.log(e));
+        } else {
+            serverApis.getAllPinByFilter(emotionId, categoryId, followingId)
+                .then(r => {
+                    setPinList(r.data);
+                })
+                .catch(e => console.log(e));
+        }
     }, []);
 
     return (
         <Container>
-            <PinItem />
-            <PinItem />
-            <PinItem />
-            <PinItem />
-            <PinItem />
-            <PinItem />
+            {pinList?.map(pin => (
+                <PinItem key={pin.pinId} pin={pin} />
+            ))}
 
             <Fab
                 sx={{ position: `fixed`, bottom: `7.5%`, right: `10%`  }}

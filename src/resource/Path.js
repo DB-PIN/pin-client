@@ -5,7 +5,9 @@ const path = {
         signUp: '/signUp',
         frame: `/*`,
         pinList: `/pinList`,
-        addPin: `/addPin/*`
+        addPin: `/addPin/*`,
+        filter: `/filter/*`,
+        myPage: `/myPage/*`,
     },
     full: {
         auth: '/auth',
@@ -15,6 +17,8 @@ const path = {
         pinList: `/pinList`,
         addPin: `/addPin`,
         addPinWith: ((pinId) => `/addPin/${pinId}`),
+        filter: `/filter`,
+        myPage: `/myPage`,
     }
 }
 

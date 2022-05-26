@@ -8,7 +8,8 @@ import dim from "../../resource/Dimentions";
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import MoodIcon from '@mui/icons-material/Mood';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
-import {IconButton} from "@mui/material";
+import {IconButton, SvgIcon} from "@mui/material";
+import {ReactComponent as EmoLove} from "../../resource/emo_love.svg";
 
 const Container = styled(Box)(p => ({
     width: `75%`,
@@ -34,7 +35,9 @@ const Mid = styled(Box)(p => ({
     height: `40%`,
 }))
 
-const PinItem = () => {
+const PinItem = ({
+    pin,
+}) => {
 
 
     return (
@@ -49,7 +52,7 @@ const PinItem = () => {
                         alignItems: `end`,
                     }}
                 >
-                    경기도 수원시 권선구 세화로 168
+                    {pin.address}
                 </Box>
 
                 <Box
@@ -84,7 +87,7 @@ const PinItem = () => {
                         alignItems: `center`,
                     }}
                 >
-                    민아랑 갔던 카페
+                    {pin.name}
                 </Box>
             </Mid>
 
@@ -98,6 +101,7 @@ const PinItem = () => {
                         alignItems: `start`,
                     }}
                 >
+                    {/*TODO: 그룹 이름 표시*/}
                     아지트
                 </Box>
 
@@ -111,11 +115,17 @@ const PinItem = () => {
                     }}
                 >
 
-                    <MoodIcon sx={{
+                    <SvgIcon component={EmoLove} inheritViewBox sx={{
                         width: `15%`,
                         height: `100%`,
                         color: `orange`,
                     }} />
+
+                    {/*<MoodIcon sx={{*/}
+                    {/*    width: `15%`,*/}
+                    {/*    height: `100%`,*/}
+                    {/*    color: `orange`,*/}
+                    {/*}} />*/}
 
                     <FastfoodIcon
                         sx={{

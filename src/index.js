@@ -7,6 +7,7 @@ import {ThemeProvider} from "@mui/system";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Frame from './page/Frame';
 import path from "./resource/Path";
+import {CookiesProvider} from "react-cookie";
 
 const theme = createTheme({
     palette: {
@@ -19,12 +20,14 @@ const theme = createTheme({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <ThemeProvider theme={theme}>
-        <BrowserRouter>
-            <Routes>
-                <Route path={path.routing.auth} element={<Auth />} />
-                <Route path={path.routing.frame} element={<Frame />} />
-            </Routes>
-        </BrowserRouter>
+        <CookiesProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path={path.routing.auth} element={<Auth />} />
+                    <Route path={path.routing.frame} element={<Frame />} />
+                </Routes>
+            </BrowserRouter>
+        </CookiesProvider>
     </ThemeProvider>
 
 );

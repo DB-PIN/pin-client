@@ -11,6 +11,8 @@ const dim = {
 
     shadow: `0px 7px 10px 0px #B5B5B5`,
 
+    followingItemHeight: `75px`,
+
     pinItemBorder: `${color.grey} 1px solid`,
 };
 
