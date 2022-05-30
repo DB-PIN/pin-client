@@ -21,20 +21,20 @@ const sx = {
 
 const emotionIcons = [
     null,
-    (sx) => <MoodIcon sx={sx} />,
-    (sx) => <SentimentSatisfiedIcon sx={sx} />,
-    (sx) => <SentimentNeutralIcon sx={sx} />,
-    (sx) => <SentimentVeryDissatisfiedIcon sx={sx} />,
-    (sx) => <MoodBadIcon sx={sx} />,
+    (sx, onClick) => <MoodIcon sx={sx} onClick={onClick} />,
+    (sx, onClick) => <SentimentSatisfiedIcon sx={sx} onClick={onClick} />,
+    (sx, onClick) => <SentimentNeutralIcon sx={sx} onClick={onClick} />,
+    (sx, onClick) => <SentimentVeryDissatisfiedIcon sx={sx} onClick={onClick} />,
+    (sx, onClick) => <MoodBadIcon sx={sx} onClick={onClick} />,
 ];
 
 const categoryIcons = [
     null,
-    (sx) => <FastfoodIcon sx={sx} />,
-    (sx) => <EmojiFoodBeverageIcon sx={sx} />,
-    (sx) => <LiquorIcon sx={sx} />,
-    (sx) => <AttractionsIcon sx={sx} />,
-    (sx) => <LocalParkingIcon sx={sx} />,
+    (sx, onClick) => <FastfoodIcon sx={sx} onClick={onClick} />,
+    (sx, onClick) => <EmojiFoodBeverageIcon sx={sx} onClick={onClick} />,
+    (sx, onClick) => <LiquorIcon sx={sx} onClick={onClick} />,
+    (sx, onClick) => <AttractionsIcon sx={sx} onClick={onClick} />,
+    (sx, onClick) => <LocalParkingIcon sx={sx} onClick={onClick} />,
 ]
 
 export {

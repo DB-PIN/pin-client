@@ -2,7 +2,6 @@
  *  필터를 적용하는 페이지
  */
 import {styled} from "@mui/system";
-import {AddBox} from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import dim from "../resource/Dimentions";
 import {FormControl, FormControlLabel, Radio, RadioGroup, Typography} from "@mui/material";
@@ -84,7 +83,6 @@ const Filter = () => {
             })
             .catch(e => console.log(e));
     }, []);
-
     return (
         <Container>
             { isLoading ? (
@@ -115,9 +113,6 @@ const Filter = () => {
                         {emotionList.map(item => (
                             emotionIcons[item.emotionId]({height: `100%`, flexGrow: 1 })
                         ))}
-
-                        {emotionIcons[4]({height: `100%`, flexGrow: 1 })}
-                        {emotionIcons[5]({height: `100%`, flexGrow: 1 })}
                     </ItemList>
 
                     <ItemList>
