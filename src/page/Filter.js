@@ -12,6 +12,7 @@ import {useEffect, useState} from "react";
 import Spin from "../component/common/Spin";
 import {serverApis} from "../api/Api";
 import {categoryIcons, emotionIcons} from '../resource/Icon';
+import Button from "@mui/material/Button";
 
 const Container = styled(Box)(p => ({
     width: `100%`,
@@ -78,32 +79,6 @@ const Filter = () => {
                         ]);
 
                         setIsLoading(false);
-
-                        // 그룹 리스트 가져오기
-                        // serverApis.getGroups()
-                        //     .then(groupsResult => {
-                        //         groups = groupsResult.data;
-                        //
-                        //         console.log(emotions);
-                        //         console.log(categories);
-                        //         console.log(groups);
-                        //
-                        //         setEmotionList([
-                        //             { id: '0', name: '-' },
-                        //             ...emotions.map(item => ({ id: item.emotionId, name: item.name }))
-                        //         ]);
-                        //         setCategoryList([
-                        //             { id: '0', name: '-' },
-                        //             ...categories.map(item => ({ id: item.categoryId, name: item.name }))
-                        //         ]);
-                        //         setGroupList([
-                        //             { id: '0', name: '-' },
-                        //             ...groups.map(item => ({ id: item.groupId, name: item.name }))
-                        //         ]);
-                        //
-                        //         setIsLoading(false);
-                        //     })
-                        //     .catch(e => console.log(e));
                     })
                     .catch(e => console.log(e));
             })
@@ -118,6 +93,8 @@ const Filter = () => {
                 <>
                     <RadioGroup defaultValue={`a`} sx={{ height: `calc(100% - 200px)` }}>
                         <SelectAllBox>
+                            <Button variant={'contained'}>검색</Button>
+
                             <Typography sx={{ height: `50px`, lineHeight: `50px` }} >전체 선택</Typography>
                             <Radio value={`a`} />
                         </SelectAllBox>
@@ -130,11 +107,6 @@ const Filter = () => {
                             <FollowingItem value={`f`} />
                             <FollowingItem value={`g`} />
                             <FollowingItem value={`h`} />
-                            <FollowingItem value={`i`} />
-                            <FollowingItem value={`i`} />
-                            <FollowingItem value={`i`} />
-                            <FollowingItem value={`i`} />
-                            <FollowingItem value={`i`} />
                             <FollowingItem value={`i`} />
                         </FollowingBox>
                     </RadioGroup>
