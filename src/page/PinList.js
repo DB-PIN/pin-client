@@ -1,7 +1,3 @@
-/**
- *  핀들이 보이는 페이지
- */
-
 import {styled} from "@mui/system";
 import Box from "@mui/material/Box";
 import PinItem from "../component/common/PinItem";
@@ -21,6 +17,9 @@ const Container = styled(Box)(p => ({
     overflow: `auto`,
 }))
 
+/**
+ * 핀들이 보이는 페이지
+ */
 const PinList = () => {
     const [searchParams] = useSearchParams();
 
@@ -32,7 +31,8 @@ const PinList = () => {
         const categoryId = searchParams.get('category') || -1;
         const followingId = searchParams.get('follow') || -1;
 
-        if(emotionId === -1 && categoryId === -1 && followingId === -1) {
+        const needAllPins = emotionId === -1 && categoryId === -1 && followingId === -1;
+        if(needAllPins) {
             serverApis.getAllPin()
                 .then(r => {
                     setPinList(r.data);
@@ -49,12 +49,12 @@ const PinList = () => {
 
     return (
         <Container>
-            {pinList?.map(pin => (
+            {pinList.map(pin => (
                 <PinItem key={pin.pinId} pin={pin} />
             ))}
 
             <Fab
-                sx={{ position: `fixed`, bottom: `7.5%`, right: `10%`  }}
+                sx={{ position: `fixed`, bottom: `7.5%`, right: `10%` }}
                 color={`primary`} size={`small`}>
                 <AddIcon />
             </Fab  >

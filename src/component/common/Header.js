@@ -43,7 +43,7 @@ const Header = () => {
 
         // 쿠키에 로그인 관련 정보가 담겨있으면 MyPage 로 이동
         if(cookies.get('isLogin')) {
-
+            navigate(path.full.myPage);
         } else {
             // 로그인 관련 정보가 없으면 로그인 페이지로 이동
             navigate(path.full.login);

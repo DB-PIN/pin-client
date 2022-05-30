@@ -8,6 +8,7 @@ const path = {
         addPin: `/addPin/*`,
         filter: `/filter/*`,
         myPage: `/myPage/*`,
+        groupList: `/groupList/*`,
     },
     full: {
         auth: '/auth',
@@ -19,6 +20,7 @@ const path = {
         addPinWith: ((pinId) => `/addPin/${pinId}`),
         filter: `/filter`,
         myPage: `/myPage`,
+        groupList: `/groupList`,
     }
 }
 
