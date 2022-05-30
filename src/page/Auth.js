@@ -11,10 +11,7 @@ import path from "../resource/Path";
 import dim from "../resource/Dimentions";
 import color from "../resource/Color";
 
-/**
- *  로그인/회원가입 페이지
- */
-
+/** 로그인/회원가입 페이지 */
 const Background = styled(Box)(p => ({
     height: `100vh`,
     backgroundImage: `url(${background})`,

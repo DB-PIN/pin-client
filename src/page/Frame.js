@@ -8,6 +8,7 @@ import path from "../resource/Path";
 import {useEffect} from "react";
 import Filter from "./Filter";
 import MyPage from "./MyPage";
+import GroupList from "./GroupList";
 
 /**
  *  Header 를 포함하는 큰 틀
@@ -44,6 +45,7 @@ const Frame = () => {
                     <Route path={path.routing.addPin} element={<AddPin />} />
                     <Route path={path.routing.filter} element={<Filter />} />
                     <Route path={path.routing.myPage} element={<MyPage />} />
+                    <Route path={path.routing.groupList} element={<GroupList />} />
                 </Routes>
             </Body>
         </Background>
