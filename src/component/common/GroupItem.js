@@ -6,6 +6,9 @@ import Box from "@mui/material/Box";
 import color from "../../resource/Color";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import {useNavigate} from "react-router-dom";
+import {useCallback} from "react";
+import path from "../../resource/Path";
 
 const Container = styled(Box)(p => ({
     width: `90%`,
@@ -17,9 +20,17 @@ const Container = styled(Box)(p => ({
     borderRadius: `30px`,
 }));
 
-const GroupItem = () => {
+const GroupItem = ({
+    group,
+}) => {
+    const navigate = useNavigate();
+
+    const onGroupItemClick = useCallback(() => {
+        navigate(path.full.pinListByGroup(group.groupId));
+    }, [group]);
+
     return (
-        <Container>
+        <Container onClick={onGroupItemClick}>
             <Box
                 sx={{
                     ml: `7.5%`,
@@ -27,9 +38,10 @@ const GroupItem = () => {
                     display: `flex`,
                     alignItems: `center`,
                     fontSize: `25px`,
+                    userSelect: `none`
                 }}
             >
-                아지트 (15)
+                {group.name + " (" + group.count + ")"}
 
                 <ArrowForwardIosIcon sx={{ width: `7.5%`, height: `100%`, ml: `5%` }} />
             </Box>

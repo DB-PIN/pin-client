@@ -24,7 +24,9 @@ const PlaceList = styled(Box)(p => ({
     justifyContent: `space-around`,
 }));
 
-const FavoritePlace = () => {
+const FavoritePlace = ({
+    topThreeCategories,
+}) => {
     return(
         <Container>
             <Box
@@ -42,9 +44,9 @@ const FavoritePlace = () => {
             </Box>
 
             <PlaceList>
-                <FavoritePlaceItem />
-                <FavoritePlaceItem />
-                <FavoritePlaceItem />
+                {topThreeCategories.map(item => (
+                    <FavoritePlaceItem key={item.categoryId} name={item.name} />
+                ))}
             </PlaceList>
         </Container>
     );

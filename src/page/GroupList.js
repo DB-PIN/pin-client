@@ -7,6 +7,36 @@ import dim from "../resource/Dimentions";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import GroupItem from "../component/common/GroupItem";
 import color from "../resource/Color";
+import {useEffect, useState} from "react";
+import {dev, dummy} from "../resource/Dev";
+
+const GroupList = () => {
+    const [groups, setGroups] = useState([]);
+
+    useEffect(() => {
+        if(dev) {
+            setGroups(dummy.groups);
+        } else {
+
+        }
+    }, []);
+
+    return (
+        <Container>
+            <BackButtonBox>
+                <ArrowBackIosIcon sx={{ width: `5%`, height: `100%` }} />
+
+                뒤로 가기
+            </BackButtonBox>
+
+            <GroupItemBox>
+                {groups.map(item => (
+                    <GroupItem key={item.groupId} group={item} />
+                ))}
+            </GroupItemBox>
+        </Container>
+    );
+};
 
 const Container = styled(Box)(p => ({
     width: `100%`,
@@ -24,6 +54,7 @@ const BackButtonBox = styled(Box)(p => ({
     display: `flex`,
     flexDirection: `row`,
     alignItems: `center`,
+    userSelect: `none`,
 }));
 
 const GroupItemBox = styled(Box)(p => ({
@@ -32,27 +63,5 @@ const GroupItemBox = styled(Box)(p => ({
     overflow: `auto`,
     backgroundColor: color.white,
 }));
-
-const GroupList = () => {
-    return (
-        <Container>
-            <BackButtonBox>
-                <ArrowBackIosIcon sx={{ width: `5%`, height: `100%` }} />
-
-                뒤로 가기
-            </BackButtonBox>
-
-            <GroupItemBox>
-                <GroupItem />
-                <GroupItem />
-                <GroupItem />
-                <GroupItem />
-                <GroupItem />
-                <GroupItem />
-                <GroupItem />
-            </GroupItemBox>
-        </Container>
-    );
-};
 
 export default GroupList;

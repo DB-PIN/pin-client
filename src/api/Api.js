@@ -2,11 +2,18 @@ import axios from 'axios';
 
 const addr = (false) ? 'http://52.78.220.84:8080' : '/api'
 
+axios.defaults.withCredentials = true;
+
 const serverApis = {
     login: (userLoginDto) => new Promise((resolve, reject) => {
         axios.post(`${addr}/user/login`, userLoginDto)
             .then(r => resolve(r))
             .catch(e => reject(e))
+    }),
+    logout: () => new Promise((resolve, reject) => {
+        axios.get(`${addr}/user/logout`)
+            .then(r => resolve(r))
+            .catch(e => reject(e));
     }),
     signUp: (userDto) => new Promise((resolve, reject) => {
         axios.post(`${addr}/user`, userDto)
@@ -19,6 +26,11 @@ const serverApis = {
             .catch(e => reject(e))
     }),
 
+    getUser: () => new Promise((resolve, reject) => {
+        axios.get(`${addr}/user`)
+            .then(r => resolve(r))
+            .catch(e => reject(e));
+    }),
     getEmotions: () => new Promise((resolve, reject) => {
         axios.get(`${addr}/emotions`)
             .then(r => resolve(r))
@@ -26,6 +38,11 @@ const serverApis = {
     }),
     getCategories: () => new Promise((resolve, reject) => {
         axios.get(`${addr}/categories`)
+            .then(r => resolve(r))
+            .catch(e => reject(e));
+    }),
+    getTopThreeCategories: () => new Promise((resolve, reject) => {
+        axios.get(`${addr}/user/categories/topThree`)
             .then(r => resolve(r))
             .catch(e => reject(e));
     }),
@@ -44,6 +61,12 @@ const serverApis = {
             .then(r => resolve(r))
             .catch(e => reject(e));
     }),
+    getAllpinByGroup: (groupId) => new Promise((resolve, reject) => {
+        axios.get(`${addr}/user/group/${groupId}/pins`)
+            .then(r => resolve(r))
+            .catch(e => reject(e));
+    }),
+
 
 
     getPlaylistAllCountByFilter: (ownerId, searchWord) => new Promise((resolve, reject) => {
