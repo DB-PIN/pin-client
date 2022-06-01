@@ -1,11 +1,11 @@
 import {styled} from "@mui/system";
 import Box from "@mui/material/Box";
 import Header from "../component/common/Header";
-import {Routes, Route, useLocation, useNavigate} from 'react-router-dom';
+import {Routes, Route, useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 import PinList from "./PinList";
 import AddPin from "./AddPin";
 import path from "../resource/Path";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Filter from "./Filter";
 import MyPage from "./MyPage";
 import GroupList from "./GroupList";
@@ -13,31 +13,27 @@ import GroupList from "./GroupList";
 /**
  *  Header 를 포함하는 큰 틀
  */
-
-const Background = styled(Box)(p => ({
-    height: `100vh`,
-    overflow: `hidden`,
-    display: `flex`,
-    flexDirection: `column`,
-    position: `relative`,
-}));
-
-const Body = styled(Box)(p => ({
-    width: `100%`,
-    height: `100%`,
-}));
-
 const Frame = () => {
     const {pathname} = useLocation();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+
+    const [isFilterable, setIsFilterable] = useState(true);
 
     useEffect(() => {
         if(pathname === '/') navigate(path.full.pinList);
+
+        // ?group= 이 포함되면 filter 버튼 삭제
+        if(searchParams.get('group')) {
+            setIsFilterable(false);
+        } else {
+            setIsFilterable(true);
+        }
     }, []);
 
     return (
         <Background>
-            <Header />
+            <Header isFilterable={isFilterable} />
 
             <Body>
                 <Routes>
@@ -51,5 +47,18 @@ const Frame = () => {
         </Background>
     )
 }
+
+const Background = styled(Box)(p => ({
+    height: `100vh`,
+    overflow: `hidden`,
+    display: `flex`,
+    flexDirection: `column`,
+    position: `relative`,
+}));
+
+const Body = styled(Box)(p => ({
+    width: `100%`,
+    height: `100%`,
+}));
 
 export default Frame;

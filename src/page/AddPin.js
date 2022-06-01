@@ -6,8 +6,10 @@ import MainButton from "../component/common/MainButton";
 import {useCallback, useEffect, useState} from "react";
 import {serverApis} from "../api/Api";
 import Spin from '../component/common/Spin';
-import dev from "../resource/Dev";
-import {county} from "../resource/String";
+import {dev} from "../resource/Dev";
+import {counties, getCounty} from "../resource/String";
+import {useNavigate} from "react-router-dom";
+import path from "../resource/Path";
 
 /**
  *  핀 등록하는 화면
@@ -32,19 +34,22 @@ const FormBox = styled(Box)(p => ({
 // TODO: API 필요
 
 const AddPin = () => {
+    const navigate = useNavigate();
+
     const [isLoading, setIsLoading] = useState(true);
 
     const [emotionList, setEmotionList] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
     const [groupList, setGroupList] = useState([]);
 
-    const [emotion, setEmotion] = useState('0');
-    const [category, setCategory] = useState('0');
-    const [group, setGroup] = useState('0');
+    const [pinName, setPinName] = useState('');
+    const [emotion, setEmotion] = useState('-1');
+    const [category, setCategory] = useState('-1');
+    const [group, setGroup] = useState('-1');
+    const [county, setCounty] = useState('-1');
+    const [detailAddress, setDetailAddress] = useState('');
 
     useEffect(() => {
-        console.log('asdf');
-
         setIsLoading(true);
 
         let emotions = [];
@@ -66,47 +71,57 @@ const AddPin = () => {
                     .then(categoriesResult => {
                         categories = categoriesResult.data;
 
-                        setEmotionList([
-                            { id: '0', name: '-' },
-                            ...emotions.map(item => ({ id: item.emotionId, name: item.name }))
-                        ]);
-                        setCategoryList([
-                            { id: '0', name: '-' },
-                            ...categories.map(item => ({ id: item.categoryId, name: item.name }))
-                        ]);
-
-                        setIsLoading(false);
-
                         // 그룹 리스트 가져오기
-                        // serverApis.getGroups()
-                        //     .then(groupsResult => {
-                        //         groups = groupsResult.data;
-                        //
-                        //         console.log(emotions);
-                        //         console.log(categories);
-                        //         console.log(groups);
-                        //
-                        //         setEmotionList([
-                        //             { id: '0', name: '-' },
-                        //             ...emotions.map(item => ({ id: item.emotionId, name: item.name }))
-                        //         ]);
-                        //         setCategoryList([
-                        //             { id: '0', name: '-' },
-                        //             ...categories.map(item => ({ id: item.categoryId, name: item.name }))
-                        //         ]);
-                        //         setGroupList([
-                        //             { id: '0', name: '-' },
-                        //             ...groups.map(item => ({ id: item.groupId, name: item.name }))
-                        //         ]);
-                        //
-                        //         setIsLoading(false);
-                        //     })
-                        //     .catch(e => console.log(e));
+                        serverApis.getGroups()
+                            .then(groupsResult => {
+                                groups = groupsResult.data;
+
+                                console.log(emotions);
+                                console.log(categories);
+                                console.log(groups);
+
+                                setEmotionList([
+                                    { id: '-1', name: '-' },
+                                    ...emotions.map(item => ({ id: item.emotionId, name: item.name }))
+                                ]);
+                                setCategoryList([
+                                    { id: '-1', name: '-' },
+                                    ...categories.map(item => ({ id: item.categoryId, name: item.name }))
+                                ]);
+                                setGroupList([
+                                    { id: '-1', name: '-' },
+                                    ...groups.map(item => ({ id: item.groupId, name: item.name }))
+                                ]);
+
+                                setIsLoading(false);
+                            })
+                            // .catch(e => console.log(e));
+                            // TODO: api 수정되면 삭제
+                            .catch(e => {
+                                setEmotionList([
+                                    { id: '-1', name: '-' },
+                                    ...emotions.map(item => ({ id: item.emotionId, name: item.name }))
+                                ]);
+                                setCategoryList([
+                                    { id: '-1', name: '-' },
+                                    ...categories.map(item => ({ id: item.categoryId, name: item.name }))
+                                ]);
+
+                                setGroupList([
+                                    { id: `-1`, name: '-'},
+                                ]);
+
+                                setIsLoading(false);
+                            });
                     })
                     .catch(e => console.log(e));
             })
             .catch(e => console.log(e));
     }, []);
+
+    const onPinNameChange = (e) => {
+        setPinName(e.target.value);
+    };
 
     const onChangeEmotion = useCallback((e) => {
         setEmotion(e.target.value);
@@ -120,8 +135,28 @@ const AddPin = () => {
         setGroup(e.target.value);
     }, []);
 
+    const onCountyChange = useCallback((e) => {
+        setCounty(e.target.value);
+    }, []);
+
+    const onDetailAddressChange = (e) => {
+        setDetailAddress(e.target.value);
+    };
+
     const onClickButton = useCallback(() => {
-        console.log(emotion + ", " + category);
+        const pinDto = {
+            name: pinName,
+            address: getCounty(county) + " " + detailAddress,
+            categoryId: category,
+            emotionId: emotion,
+            groupId: group,
+        };
+
+        serverApis.addPin(pinDto)
+            .then(r => {
+                navigate(path.full.pinList);
+            })
+            .catch(e => console.log(e));
     }, [emotion, category]);
 
     return (
@@ -131,7 +166,7 @@ const AddPin = () => {
             ) : (
                 <>
                     <FormBox>
-                        <AddPinItem type={`input`}>
+                        <AddPinItem type={`input`} value={pinName} onChangeValue={onPinNameChange} >
                             PIN 이름
                         </AddPinItem>
 
@@ -147,11 +182,11 @@ const AddPin = () => {
                             그룹
                         </AddPinItem>
 
-                        <AddPinItem type={`select`} menuItemList={county}>
+                        <AddPinItem type={`select`} menuItemList={[{id: '-1', name: '-'}, ...counties]} value={county} onChangeValue={onCountyChange} >
                             시/군/구
                         </AddPinItem>
 
-                        <AddPinItem type={`input`}>
+                        <AddPinItem type={`input`} value={detailAddress} onChangeValue={onDetailAddressChange} >
                             상세 주소
                         </AddPinItem>
                     </FormBox>

@@ -15,10 +15,12 @@ const Container = styled(Box)(p => ({
     alignItems: `center`,
 }));
 
-const FavoritePlaceItem = () => {
+const FavoritePlaceItem = ({
+    name,
+}) => {
     return (
         <Container>
-            카페
+            {name}
         </Container>
     );
 };

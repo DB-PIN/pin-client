@@ -29,7 +29,7 @@ const AddPinItem = ({
             </AddPinLabel>
 
             {type === 'input' ? (
-                <Input sx={{ width: `70%`, height: `100%` }} />
+                <Input sx={{ width: `70%`, height: `100%` }} value={value} onChange={onChangeValue} />
             ) : (
                 <Select sx={{ width: `70%`, height: `100%` }} value={value} onChange={onChangeValue} >
                     {menuItemList?.map(item => (

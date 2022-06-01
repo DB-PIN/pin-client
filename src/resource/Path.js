@@ -16,6 +16,7 @@ const path = {
         signUp: '/auth/signup',
         frame: `/`,
         pinList: `/pinList`,
+        pinListByGroup: (groupId) => `/pinList?group=${groupId}`,
         addPin: `/addPin`,
         addPinWith: ((pinId) => `/addPin/${pinId}`),
         filter: `/filter`,

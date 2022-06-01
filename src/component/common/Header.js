@@ -27,7 +27,9 @@ const Container = styled(Box)(p => ({
     flexDirection: 'row',
 }))
 
-const Header = () => {
+const Header = ({
+    isFilterable,
+}) => {
     const navigate = useNavigate();
 
     const onClickLogo = useCallback(() => {
@@ -74,15 +76,18 @@ const Header = () => {
                     width: `50%`,
                 }}
             >
-                <IconButton
-                    onClick={onClickFilterBtn}
-                    sx={{
-                        width: dim.headerHeight,
-                        height: dim.headerHeight,
-                    }}
-                >
-                    <FilterListIcon />
-                </IconButton>
+                {isFilterable &&
+                    (<IconButton
+                        onClick={onClickFilterBtn}
+                        sx={{
+                            width: dim.headerHeight,
+                            height: dim.headerHeight,
+                        }}
+                    >
+                        <FilterListIcon />
+                    </IconButton>)
+                }
+
 
                 <IconButton
                     onClick={onClickUserBtn}

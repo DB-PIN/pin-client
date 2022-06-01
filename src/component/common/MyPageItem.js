@@ -20,11 +20,14 @@ const Label = styled(Box)(p => ({
     fontSize: `20px`,
 }));
 
-const MyPageItem = () => {
+const MyPageItem = ({
+    text,
+    onClick,
+}) => {
     return (
-        <Container>
+        <Container onClick={onClick}>
             <Label>
-                나의 그룹 관리
+                {text}
             </Label>
 
             <ArrowForwardIosIcon sx={{ width: `5%`, height: `100%` }} />

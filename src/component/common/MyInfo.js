@@ -16,18 +16,20 @@ const Container = styled(Box)(p => ({
 }));
 
 const InnerBox = styled(Box)(p => ({
-    width: `50%`,
+    width: `70%`,
     height: `70%`,
     display: `flex`,
     flexDirection: `row`,
     marginLeft: `5%`,
 }));
 
-const MyInfo = () => {
+const MyInfo = ({
+    user,
+}) => {
     return(
         <Container>
             <InnerBox>
-                <AccountCircleIcon sx={{ width: `40%`, height: `100%`, color: color.grey }} />
+                <AccountCircleIcon sx={{ width: `30%`, height: `100%`, color: color.grey }} />
 
                 <Box
                     sx={{
@@ -40,7 +42,7 @@ const MyInfo = () => {
                         fontSize: `20px`,
                     }}
                 >
-                    박상연
+                    {user.name}
                 </Box>
 
                 <ArrowForwardIosIcon sx={{ width: `10%`, height: `100%`}} />
