@@ -62,7 +62,7 @@ const serverApis = {
             .catch(e => reject(e));
     }),
     getAllPinByFilter: (emotionId, categoryId, followingId) => new Promise((resolve, reject) => {
-        axios.get(`${addr}/pins/emotion/${emotionId}/category/${categoryId}/following/${followingId}`)
+        axios.get(`${addr}/pins/emotion/${emotionId}/category/${categoryId}/follow/${followingId}`)
             .then(r => resolve(r))
             .catch(e => reject(e));
     }),
@@ -70,6 +70,21 @@ const serverApis = {
         axios.get(`${addr}/user/group/${groupId}/pins`)
             .then(r => resolve(r))
             .catch(e => reject(e));
+    }),
+    getFollowings: () => new Promise((resolve, reject) => {
+        axios.get(`${addr}/user/following`)
+            .then(r => resolve(r))
+            .catch(e => reject(e));
+    }),
+    addFollowing: (targetUserDto) => new Promise((resolve, reject) => {
+        axios.post(`${addr}/user/following`, targetUserDto)
+            .then(r => resolve(r))
+            .catch(e => reject(e))
+    }),
+    deleteFollowing: (targetUserId) => new Promise((resolve, reject) => {
+        axios.delete(`${addr}/user/following/${targetUserId}`)
+            .then(r => resolve(r))
+            .catch(e => reject(e))
     }),
 }
 

@@ -4,7 +4,7 @@ import PinItem from "../component/common/PinItem";
 import dim from "../resource/Dimentions";
 import {Fab, SvgIcon} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {serverApis} from "../api/Api";
 import path from "../resource/Path";
@@ -27,14 +27,29 @@ const PinList = () => {
     const navigate = useNavigate();
 
     const [pinList, setPinList] = useState([]);
+    const [followings, setFollowings] = useState([]);
 
     useEffect(() => {
+        const isLogin = new Cookies().get('isLogin');
+
+        if (isLogin) {
+            serverApis.getFollowings()
+                .then(r => {
+                    setFollowings(r.data);
+
+                    getPinList();
+                })
+                .catch(e => console.log(e));
+        } else getPinList();
+    }, []);
+
+    const getPinList = useCallback(() => {
         // /pinList?group=1
         const groupId = searchParams.get('group') || -1;
 
         const hasGroupId = groupId !== -1;
-        if(hasGroupId) {
-            if(dev) {
+        if (hasGroupId) {
+            if (dev) {
                 setPinList(dummy.pinsByGroup);
             } else {
                 serverApis.getAllpinByGroup(groupId)
@@ -50,7 +65,7 @@ const PinList = () => {
             const followingId = searchParams.get('follow') || -1;
 
             const needAllPins = emotionId === -1 && categoryId === -1 && followingId === -1;
-            if(needAllPins) {
+            if (needAllPins) {
                 serverApis.getAllPin()
                     .then(r => {
                         setPinList(r.data);
@@ -70,7 +85,7 @@ const PinList = () => {
     const onFabClick = () => {
         const isLogin = new Cookies().get('isLogin')
 
-        if(isLogin) {
+        if (isLogin) {
             navigate(path.full.addPin);
         }
     };
@@ -78,17 +93,17 @@ const PinList = () => {
     return (
         <Container>
             {pinList.map(pin => (
-                <PinItem key={pin.pinId} pin={pin} />
+                <PinItem key={pin.pinId} pin={pin} followings={followings}/>
             ))}
 
             <Fab
                 onClick={onFabClick}
-                sx={{ position: `fixed`, bottom: `7.5%`, right: `10%` }}
+                sx={{position: `fixed`, bottom: `7.5%`, right: `10%`}}
                 color={`primary`} size={`small`}>
-                <AddIcon />
+                <AddIcon/>
             </Fab>
         </Container>
     );
-};
+}
 
 export default PinList;

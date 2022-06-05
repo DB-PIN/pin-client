@@ -17,6 +17,7 @@ const path = {
         frame: `/`,
         pinList: `/pinList`,
         pinListByGroup: (groupId) => `/pinList?group=${groupId}`,
+        pinListByFilter: (emotionId, categoryId, followingId) => `/pinList?emotion=${emotionId}&category=${categoryId}&follow=${followingId}`,
         addPin: `/addPin`,
         addPinWith: ((pinId) => `/addPin/${pinId}`),
         filter: `/filter`,

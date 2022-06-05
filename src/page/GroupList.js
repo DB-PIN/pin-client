@@ -1,6 +1,3 @@
-/**
- *  나의 그룹 리스트
- */
 import {styled} from "@mui/system";
 import Box from "@mui/material/Box";
 import dim from "../resource/Dimentions";
@@ -14,6 +11,9 @@ import {serverApis} from "../api/Api";
 import {Dialog, DialogTitle} from "@mui/material";
 import GroupAddDialog from "../component/common/GroupAddDIalog";
 
+/**
+ *  나의 그룹 리스트
+ */
 const GroupList = () => {
     const [groups, setGroups] = useState([]);
     const [addDialogOpen, setAddDialogOpen] = useState(false);

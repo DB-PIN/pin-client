@@ -2,15 +2,38 @@ import {styled} from "@mui/system";
 import Box from "@mui/material/Box";
 import dim from "../../resource/Dimentions";
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import {IconButton} from "@mui/material";
 import {categoryIcons, emotionIcons} from "../../resource/Icon";
+import {Cookies} from "react-cookie";
+import {serverApis} from "../../api/Api";
+import {useNavigate} from "react-router-dom";
 
 /**
  *  핀 하나의 정보를 보여주는 아이템
  */
 const PinItem = ({
     pin,
+    followings,
 }) => {
+    const navigate = useNavigate();
+
+    const onAddFollowingClick = () => {
+        serverApis.addFollowing({ userId: pin.userId })
+            .then(r => {
+                navigate(0);
+            })
+            .catch(e => console.log(e));
+    };
+
+    const onDeleteFollowingClick = () => {
+        serverApis.deleteFollowing(pin.userId)
+            .then(r => {
+                navigate(0);
+            })
+            .catch(e => console.log(e));
+    };
+
     return (
         <Container>
             <TopBottom>
@@ -34,15 +57,29 @@ const PinItem = ({
                         justifyContent: `end`,
                     }}
                 >
-                    <IconButton
-                        // onClick={}
-                        sx={{
-                            width: `20%`,
-                            height: `100%`,
-                        }}
-                    >
-                        <PersonAddAltIcon />
-                    </IconButton>
+                    {new Cookies().get('isLogin') ? (
+                        followings.find(f => f.followingId === pin.userId) ? (
+                            <IconButton
+                                onClick={onDeleteFollowingClick}
+                                sx={{
+                                    width: `20%`,
+                                    height: `100%`,
+                                }}
+                            >
+                                <PersonRemoveIcon />
+                            </IconButton>
+                        ) : (
+                            <IconButton
+                                onClick={onAddFollowingClick}
+                                sx={{
+                                    width: `20%`,
+                                    height: `100%`,
+                                }}
+                            >
+                                <PersonAddAltIcon />
+                            </IconButton>
+                        )
+                    ) : (<></>)}
                 </Box>
             </TopBottom>
             <Mid>

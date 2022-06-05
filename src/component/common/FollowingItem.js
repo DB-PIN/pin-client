@@ -46,7 +46,7 @@ const FollowingItem = ({
                     alignItems: `center`,
                 }}
             >
-                박상연
+                {value.User.name}
             </Box>
 
             <Box
@@ -58,7 +58,7 @@ const FollowingItem = ({
                     alignItems: `center`,
                 }}
             >
-                <Radio value={value} />
+                <Radio value={`${value.followingId}`} />
             </Box>
         </Container>
     );
