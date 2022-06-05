@@ -9,6 +9,7 @@ import {serverApis} from "../api/Api";
 import {dev, dummy} from "../resource/Dev";
 import {useNavigate} from "react-router-dom";
 import path from "../resource/Path";
+import {Cookies} from "react-cookie";
 
 /**
  *  내 정보가 표시되는 페이지
@@ -47,7 +48,10 @@ const MyPage = () => {
     const onLogoutClick = () => {
         serverApis.logout()
             .then(r => {
-                // TODO: 쿠키 삭제
+                new Cookies().remove("isLogin");
+                new Cookies().remove("sid");
+
+                navigate(path.full.pinList);
             })
             .catch(e => console.log(e));
     };
