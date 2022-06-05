@@ -20,6 +20,9 @@ const SignUpBox = ({
     onChangeEmail,
     onChangePassword,
     onChangeNickname,
+
+    setEmail,
+    setPassword,
 }) => {
     const navigate = useNavigate();
 
@@ -39,6 +42,9 @@ const SignUpBox = ({
                 console.log('회원가입 결과: ' + r.data);
 
                 setIsLoading(false);
+
+                setEmail('')
+                setPassword('')
 
                 navigate(path.full.login);
             })

@@ -78,6 +78,8 @@ const Auth = () => {
                             onChangeEmail={onChangeEmail}
                             onChangePassword={onChangePassword}
                             onChangeNickname={onChangeNickname}
+                            setEmail={setEmail}
+                            setPassword={setPassword}
                         />} />
                     </Routes>
                 </Box>

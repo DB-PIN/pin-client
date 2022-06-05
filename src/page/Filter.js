@@ -101,10 +101,12 @@ const Filter = () => {
                 <>
                     <RadioGroup value={selectedFollowing} onChange={onSelectedFollowingChange} sx={{ height: `calc(100% - 200px)` }}>
                         <SelectAllBox>
-                            <Button variant={'contained'} onClick={onSearchClick} >검색</Button>
+                            <Button sx={{m: `5px`}} variant={'contained'} onClick={onSearchClick} >검색</Button>
 
-                            <Typography sx={{ height: `50px`, lineHeight: `50px` }} >전체 선택</Typography>
-                            <Radio value={`-1`} />
+                            <Box sx={{display: `flex`}}>
+                                <Typography sx={{ height: `50px`, lineHeight: `50px` }} >전체 선택</Typography>
+                                <Radio value={`-1`} />
+                            </Box>
                         </SelectAllBox>
 
                         <FollowingBox>
@@ -143,7 +145,7 @@ const SelectAllBox = styled(Box)(p => ({
     height: `50px`,
     display: `flex`,
     flexDirection: `row`,
-    justifyContent: `end`,
+    justifyContent: `space-between`,
 }));
 
 const FollowingBox = styled(Box)(p => ({

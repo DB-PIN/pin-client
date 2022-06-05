@@ -86,6 +86,11 @@ const serverApis = {
             .then(r => resolve(r))
             .catch(e => reject(e))
     }),
+    deleteGroup: (groupId) => new Promise((resolve, reject) => {
+        axios.delete(`${addr}/user/group/${groupId}`)
+            .then(r => resolve(r))
+            .catch(e => reject(e))
+    }),
 }
 
 export {

@@ -9,6 +9,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import {useNavigate} from "react-router-dom";
 import {useCallback} from "react";
 import path from "../../resource/Path";
+import {serverApis} from "../../api/Api";
 
 const Container = styled(Box)(p => ({
     width: `90%`,
@@ -29,9 +30,18 @@ const GroupItem = ({
         navigate(path.full.pinListByGroup(group.groupId));
     }, [group]);
 
+    const onGroupDeleteClick = () => {
+        serverApis.deleteGroup(group.groupId)
+            .then(r => {
+                navigate(0);
+            })
+            .catch(e => console.log(e));
+    };
+
     return (
-        <Container onClick={onGroupItemClick}>
+        <Container >
             <Box
+                onClick={onGroupItemClick}
                 sx={{
                     ml: `7.5%`,
                     width: `82.5%`,
@@ -46,7 +56,7 @@ const GroupItem = ({
                 <ArrowForwardIosIcon sx={{ width: `7.5%`, height: `100%`, ml: `5%` }} />
             </Box>
 
-            <RemoveCircleIcon sx={{ width: `7.5%`, height: `100%`, mr: `2.5%` }} />
+            <RemoveCircleIcon onClick={onGroupDeleteClick} sx={{ width: `7.5%`, height: `100%`, mr: `2.5%` }} />
         </Container>
     );
 };
