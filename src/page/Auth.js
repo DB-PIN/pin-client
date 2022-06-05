@@ -1,7 +1,6 @@
 import {styled} from "@mui/system";
 import Box from "@mui/material/Box";
 import background from "../resource/background.png";
-import logoImage from "../resource/logo.png";
 import {useCallback, useState} from "react";
 import {Route, Routes} from 'react-router-dom';
 import LoginBox from "../component/common/LoginBox";

@@ -13,7 +13,7 @@ import {Cookies} from "react-cookie";
 
 const Container = styled(Box)(p => ({
     width: `100%`,
-    height: `100%`,
+    height: `calc(100% - ${dim.headerHeight})`,
     marginTop: dim.headerHeight,
     position: `relative`,
     overflow: `auto`,

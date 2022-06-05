@@ -1,12 +1,10 @@
 import {styled} from "@mui/system";
 import Box from "@mui/material/Box";
-import dim from "../resource/Dimentions";
 import AddPinItem from "../component/common/AddPinItem";
 import MainButton from "../component/common/MainButton";
 import {useCallback, useEffect, useState} from "react";
 import {serverApis} from "../api/Api";
 import Spin from '../component/common/Spin';
-import {dev} from "../resource/Dev";
 import {counties, getCounty} from "../resource/String";
 import {useNavigate} from "react-router-dom";
 import path from "../resource/Path";
@@ -30,8 +28,6 @@ const FormBox = styled(Box)(p => ({
     top: `20%`,
     transform: `translate(-50%, 0)`,
 }));
-
-// TODO: API 필요
 
 const AddPin = () => {
     const navigate = useNavigate();
@@ -153,7 +149,7 @@ const AddPin = () => {
                 navigate(path.full.pinList);
             })
             .catch(e => console.log(e));
-    }, [emotion, category]);
+    }, [county, emotion, category]);
 
     return (
         <Container>
