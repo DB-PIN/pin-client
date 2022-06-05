@@ -25,6 +25,11 @@ const serverApis = {
             .then(r => resolve(r))
             .catch(e => reject(e))
     }),
+    addGroup: (groupDto) => new Promise((resolve, reject) => {
+        axios.post(`${addr}/user/group`, groupDto)
+            .then(r => resolve(r))
+            .catch(e => reject(e))
+    }),
 
     getUser: () => new Promise((resolve, reject) => {
         axios.get(`${addr}/user`)
