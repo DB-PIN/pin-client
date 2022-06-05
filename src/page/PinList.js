@@ -7,9 +7,9 @@ import AddIcon from '@mui/icons-material/Add';
 import {useEffect, useState} from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {serverApis} from "../api/Api";
-import EmoLove from '../resource/emo_love.svg';
 import path from "../resource/Path";
 import {dev, dummy} from "../resource/Dev";
+import {Cookies} from "react-cookie";
 
 const Container = styled(Box)(p => ({
     width: `100%`,
@@ -68,7 +68,11 @@ const PinList = () => {
 
     // 플로팅 버튼 온클릭 - 새 핀 생성
     const onFabClick = () => {
-        navigate(path.full.addPin);
+        const isLogin = new Cookies().get('isLogin')
+
+        if(isLogin) {
+            navigate(path.full.addPin);
+        }
     };
 
     return (

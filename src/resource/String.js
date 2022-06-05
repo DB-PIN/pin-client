@@ -18,7 +18,7 @@ const counties = [
     { id: '17', name:`제주특별자치도`},
 ];
 
-const getCounty = (id) => counties[id+1].name;
+const getCounty = (id) => counties.find(item => item.id === id).name;
 
 const date = '2020-01-01 00:00:00';
 

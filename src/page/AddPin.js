@@ -57,10 +57,6 @@ const AddPin = () => {
         let groups = [];
 
         // TODO: groups 가져오는 API 완성되면 삭제
-        if(!dev) {
-            setIsLoading(false);
-            return;
-        }
         // 감정 리스트 가져오기
         serverApis.getEmotions()
             .then(emotionsResult => {

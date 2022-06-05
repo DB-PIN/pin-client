@@ -1,6 +1,6 @@
 import {date} from "./String";
 
-const dev = true;
+const dev = false;
 
 /**
  * User {
